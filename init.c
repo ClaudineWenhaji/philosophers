@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-void    init_input(t_philo *philo, char **av)
+/*void    init_input(t_philo *philo, char **av)
 {
     philo->nbr_of_philos = ft_atoi(av[1]);
     philo->time_to_die = ft_atoi(av[2]);
@@ -23,30 +23,34 @@ void    init_input(t_philo *philo, char **av)
     else
 
         philo->nbr_times_to_eat = -1;
-}
+}*/
 
-void init_philos(t_philo *philo, t_program *program, pthread_mutex_t *forks, char **av)
+void init_philos(t_philo *philo, t_program *program, pthread_mutex_t *forks, int nbr,
+    long time_to_die, long time_to_eat, long time_to_sleep, long nbr_times_to_eat)
 {
     int i;
+    long start_time;
     
     i = 0;
-    while (av[1])
+    start_time = get_current_time();
+    while (i < nbr)
     {
         philo[i].id = i + 1;
         philo[i].eating = 0;
         philo[i].meal_eaten = 0;
-        init_input(&philo[i], av);
-        philo[i].last_meal = get_current_time();
-        philo[i].start_time = get_current_time();
+        philo[i].nbr_of_philos = nbr;
+        philo[i].time_to_die = time_to_die;
+        philo[i].time_to_eat = time_to_eat;
+        philo[i].time_to_sleep = time_to_sleep;
+        philo[i].nbr_times_to_eat = nbr_times_to_eat;
+        philo[i].last_meal = start_time;
+        philo[i].start_time = start_time;
         philo[i].dead = &program->dead_flag;
         philo[i].write_lock = &program->write_lock;
         philo[i].dead_lock = &program->dead_lock;
         philo[i].meal_lock = &program->meal_lock;
         philo[i].left_fork = &forks[i];
-        if (i == 0)
-            philo[i].right_fork = &forks[philo[i].nbr_of_philos - 1];
-        else
-            philo[i].right_fork = &forks[i - 1];
+        philo[i].right_fork = &forks[(i + nbr - 1) % nbr];
         i++;
     }
 }

@@ -49,7 +49,7 @@ int ft_atoi(char *str)
     return ((int)sum);
 }
 
-void    destroy_all(char *str, t_program *program, pthread_mutex_t *forks)
+void    destroy_all(char *str, t_program *program, pthread_mutex_t *forks, int nbr)
 {
     int i;
 
@@ -62,12 +62,13 @@ void    destroy_all(char *str, t_program *program, pthread_mutex_t *forks)
     pthread_mutex_destroy(&program->write_lock);
     pthread_mutex_destroy(&program->meal_lock);
     pthread_mutex_destroy(&program->dead_lock);
-    while( i < program->philos[0].nbr_of_philos)
+    while( i < nbr)
     {
         pthread_mutex_destroy(&forks[i]);
         i++;
     }
-    
+    free(program->philos);
+    free(forks);
 }
 
 int ft_usleep(int milliseconds)
@@ -76,15 +77,15 @@ int ft_usleep(int milliseconds)
 
     start = get_current_time();
     while ((get_current_time() - start) < milliseconds)
-        usleep(500);
+        usleep(100);
     return (0);
 }
 
-int get_current_time(void)
+long get_current_time(void)
 {
     struct timeval  time;
     
     if (gettimeofday(&time, NULL) == -1)
         error("gettimeofday() error\n");
-    return (time.tv_sec * 1000 + time.tv_sec / 1000);
+    return (time.tv_sec * 1000L + time.tv_usec / 1000L);
 }

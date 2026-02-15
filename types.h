@@ -22,11 +22,11 @@ typedef struct s_philo
     int             eating;
     int             meal_eaten;
     
-    long            last_meal;
-    long            start_time;
-    long            time_to_die;
-    long            time_to_eat;
-    long            time_to_sleep;
+    long             last_meal;
+    long             start_time;
+    long             time_to_die;
+    long             time_to_eat;
+    long             time_to_sleep;
 
     int             nbr_of_philos;
     int             nbr_times_to_eat;

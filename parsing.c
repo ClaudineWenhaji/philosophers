@@ -19,7 +19,7 @@ int check_arg_content(char *arg)
     i = 0;
     while (arg[i])
     {
-        if (arg[1] < '0' || arg[i] > '9')
+        if (arg[i] < '0' || arg[i] > '9')
             return (1);
         i++;
     }

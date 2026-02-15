@@ -41,28 +41,28 @@ void    *philo_routine(void *pointer)
     return (pointer);
 }
 
-int create_threads(t_program *program, pthread_mutex_t *forks)
+int create_threads(t_program *program, pthread_mutex_t *forks, int nbr)
 {
     pthread_t observer;
     int             i;
-
-    if (pthread_create(&observer, NULL, &thread_monitoring, program->philos) != 0)
-        destroy_all("Thread creation error", program, forks);
+  
     i = 0;
-    while (i < program->philos[0].nbr_of_philos)
+    while (i < nbr)
     {
         if (pthread_create(&program->philos[i].thread, NULL, &philo_routine,
             &program->philos[i]) != 0)
-            destroy_all("Thread creation error", program, forks);
+            destroy_all("Thread creation error", program, forks, nbr);
         i++;
     }
+    if (pthread_create(&observer, NULL, &thread_monitoring, program->philos) != 0)
+        destroy_all("Thread creation error", program, forks, nbr);
     i = 0;
     if (pthread_join(observer, NULL) != 0)
-        destroy_all("Thread join error", program, forks);
-    while (i < program->philos[i].nbr_of_philos)
+        destroy_all("Thread join error", program, forks, nbr);
+    while (i < nbr)
     {
         if (pthread_join(program->philos[i].thread, NULL) != 0)
-            destroy_all("Thread join error", program, forks);
+            destroy_all("Thread join error", program, forks, nbr);
         i++;
     }
     return (0);
