@@ -6,14 +6,14 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:07:05 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/13 16:56:59 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:57:40 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int error(char *msg)
+int	error(char *msg)
 {
-    printf("philosophers %s\n:", msg);
-    exit (EXIT_FAILURE);
+	printf("philosophers %s\n:", msg);
+	exit (EXIT_FAILURE);
 }

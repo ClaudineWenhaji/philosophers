@@ -6,86 +6,86 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 16:09:53 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/13 16:24:11 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:42:59 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int i;
-    
-    if (str == NULL)
-        return (0);
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	int	i;
+
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-int ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
-    int i;
-    int sum;
-    
-    i = 0;
-    sum = 0;
-    while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-        i++;
-    if (str[i] == '+')
-        i++;
-    if (str[i] == '-')
-        return (-1);
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        sum = sum * 10 + (str[i] - '0');
-        if (sum > INT_MAX)
-            return (-1);
-        i++;
-    }
-    if (str[i] != '\0')
-        return (-1);
-    return ((int)sum);
+	int	i;
+	int	sum;
+
+	i = 0;
+	sum = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '+')
+		i++;
+	if (str[i] == '-')
+		return (-1);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		sum = sum * 10 + (str[i] - '0');
+		if (sum > INT_MAX)
+			return (-1);
+		i++;
+	}
+	if (str[i] != '\0')
+		return (-1);
+	return ((int)sum);
 }
 
-void    destroy_all(char *str, t_program *program, pthread_mutex_t *forks, int nbr)
+void	destroy_all(char *str, t_program *program, pthread_mutex_t *forks, int nbr)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (str)
-    {
-        write(2, str, ft_strlen(str));
-        write(2, "\n", 1);
-    }
-    pthread_mutex_destroy(&program->write_lock);
-    pthread_mutex_destroy(&program->meal_lock);
-    pthread_mutex_destroy(&program->dead_lock);
-    while( i < nbr)
-    {
-        pthread_mutex_destroy(&forks[i]);
-        i++;
-    }
-    free(program->philos);
-    free(forks);
+	i = 0;
+	if (str)
+	{
+		write(2, str, ft_strlen(str));
+		write(2, "\n", 1);
+	}
+	pthread_mutex_destroy(&program->write_lock);
+	pthread_mutex_destroy(&program->meal_lock);
+	pthread_mutex_destroy(&program->dead_lock);
+	while (i < nbr)
+	{
+		pthread_mutex_destroy(&forks[i]);
+		i++;
+	}
+	free(program->philos);
+	free(forks);
 }
 
-int ft_usleep(int milliseconds)
+int	ft_usleep(int milliseconds)
 {
-    int start;
+	long	start;
 
-    start = get_current_time();
-    while ((get_current_time() - start) < milliseconds)
-        usleep(100);
-    return (0);
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+		usleep(100);
+	return (0);
 }
 
-long get_current_time(void)
+long	get_current_time(void)
 {
-    struct timeval  time;
-    
-    if (gettimeofday(&time, NULL) == -1)
-        error("gettimeofday() error\n");
-    return (time.tv_sec * 1000L + time.tv_usec / 1000L);
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		error("gettimeofday() error\n");
+	return (time.tv_sec * 1000L + time.tv_usec / 1000L);
 }
