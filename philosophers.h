@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:31:03 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 12:55:01 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/16 18:02:09 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 # define    MIN_ARG_NBR 5
 # define    MAX_ARG_NBR 6
-# define    PHILO_MAX   300
 
 int		parsing(char **av);
 int		error(char *msg);
@@ -48,6 +47,7 @@ void	destroy_all(char *str, t_program *program,
 			pthread_mutex_t *forks, int nbr);
 int		ft_atoi(char *str);
 int		ft_strlen(char *str);
+int		ft_strcmp(char *s1, char *s2);
 void	think(t_philo *philo);
 void	dream(t_philo *philo);
 void	eat(t_philo *philo);

@@ -6,11 +6,21 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:00:33 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 15:09:26 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/16 18:01:56 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while ((s1[i] || s2[i]) && (s1[i] == s2[i]))
+		i++;
+	return (s1[i] - s2[i]);
+}
 
 int	check_arg_content(char *arg)
 {
@@ -28,8 +38,7 @@ int	check_arg_content(char *arg)
 
 int	parsing(char **av)
 {
-	if (ft_atoi(av[1]) > PHILO_MAX || ft_atoi(av[1]) <= 0
-		|| check_arg_content(av[1]) == 1)
+	if (ft_atoi(av[1]) <= 0 || check_arg_content(av[1]) == 1)
 		error("Invalid number of philosophers\n");
 	if (ft_atoi(av[2]) <= 0 || check_arg_content(av[2]) == 1)
 		error("Invalid time to die\n");
