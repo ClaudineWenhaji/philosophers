@@ -23,7 +23,7 @@ void	dream(t_philo *philo)
 	ft_usleep(philo->time_to_sleep);
 }
 
-void	one_philosopher(t_philo *philo)
+void	one_philosopher_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
 	if (!dead_loop(philo))
@@ -51,7 +51,7 @@ void	eat(t_philo *philo)
 {
 	if (philo->nbr_of_philos == 1)
 	{
-		one_philosopher(philo);
+		one_philosopher_eat(philo);
 		return ;
 	}
 	if ((philo->id % 2 == 0 && !take_fork(philo->left_fork, philo))
