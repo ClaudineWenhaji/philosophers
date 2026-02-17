@@ -15,26 +15,30 @@
 void	print_message(char *str, t_philo *philo, int id)
 {
 	long	time;
+	int		dead;
 
+	pthread_mutex_lock(philo->dead_lock);
+	dead = *philo->dead;
+	pthread_mutex_unlock(philo->dead_lock);
+	if (dead && ft_strcmp(str, "died") != 0)
+		return ;
 	pthread_mutex_lock(philo->write_lock);
 	time = get_current_time() - philo->start_time;
-	if (!dead_loop(philo) || ft_strcmp(str, "died") == 0)
-		printf("%ld %d %s\n", time, id, str);
+	printf("%ld %d %s\n", time, id, str);
 	pthread_mutex_unlock(philo->write_lock);
 }
 
 int	philosopher_dead(t_philo *philo, long time_to_die)
 {
 	long	current_time;
+	long	last_meal;
 
 	pthread_mutex_lock(philo->meal_lock);
-	current_time = get_current_time();
-	if (current_time - philo->last_meal >= time_to_die)
-	{
-		pthread_mutex_unlock(philo->meal_lock);
-		return (1);
-	}
+	last_meal = philo->last_meal;
 	pthread_mutex_unlock(philo->meal_lock);
+	current_time = get_current_time();
+	if (current_time - last_meal >= time_to_die)
+		return (1);
 	return (0);
 }
 
@@ -56,6 +60,7 @@ int	check_if_dead(t_philo *philos, int nbr)
 				return (1);
 			}
 			pthread_mutex_unlock(philos[0].dead_lock);
+			return (1);
 		}
 		i++;
 	}
@@ -67,10 +72,10 @@ int	check_if_all_ate(t_philo *philos, int nbr)
 	int	i;
 	int	finished_eating;
 
-	i = 0;
-	finished_eating = 0;
 	if (philos[0].nbr_times_to_eat == -1)
 		return (0);
+	i = 0;
+	finished_eating = 0;
 	while (i < nbr)
 	{
 		pthread_mutex_lock(philos[i].meal_lock);
@@ -79,10 +84,11 @@ int	check_if_all_ate(t_philo *philos, int nbr)
 		pthread_mutex_unlock(philos[i].meal_lock);
 		i++;
 	}
-	if (finished_eating == philos[0].nbr_of_philos)
+	if (finished_eating == nbr)
 	{
 		pthread_mutex_lock(philos[0].dead_lock);
-		*philos[0].dead = 1;
+		if (*(philos[0].dead) == 0)
+			*(philos[0].dead) = 1;
 		pthread_mutex_unlock(philos[0].dead_lock);
 		return (1);
 	}
@@ -96,10 +102,11 @@ void	*thread_monitoring(void *pointer)
 	program = (t_program *)pointer;
 	while (1)
 	{
-		if (check_if_dead(program->philos, program->philos[0].nbr_of_philos)
-			|| check_if_all_ate(program->philos, program->philos[0].nbr_of_philos))
+		if (check_if_dead(program->philos, program->philos[0].nbr_of_philos))
 			break ;
-		ft_usleep(500);
+		if (check_if_all_ate(program->philos, program->philos[0].nbr_of_philos))
+			break ;
+		usleep(100);
 	}
 	return (NULL);
 }

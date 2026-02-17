@@ -18,11 +18,12 @@
 
 int	dead_loop(t_philo *philo)
 {
+	int	dead;
+
 	pthread_mutex_lock(philo->dead_lock);
-	if (*philo->dead == 1)
-		return (pthread_mutex_unlock(philo->dead_lock), 1);
+	dead = *philo->dead;
 	pthread_mutex_unlock(philo->dead_lock);
-	return (0);
+	return (dead);
 }
 
 void	*philo_routine(void *pointer)
@@ -32,13 +33,19 @@ void	*philo_routine(void *pointer)
 	philo = (t_philo *)pointer;
 	if (philo->id % 2 == 0)
 		ft_usleep(1);
-	while (!dead_loop(philo))
+	while (1)
 	{
+		if (dead_loop(philo))
+			break;
 		eat(philo);
+		if (dead_loop(philo))
+			break;
 		dream(philo);
+		if (dead_loop(philo))
+			break;
 		think(philo);
 	}
-	return (pointer);
+	return (NULL);
 }
 
 int	create_threads(t_program *program, pthread_mutex_t *forks, int nbr)

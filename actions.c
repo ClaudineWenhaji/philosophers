@@ -28,7 +28,8 @@ void	eat(t_philo *philo)
 	if (philo->nbr_of_philos == 1)
 	{
 		pthread_mutex_lock(philo->right_fork);
-		print_message("has taken a fork", philo, philo->id);
+		if (!dead_loop(philo))
+	        print_message("has taken a fork", philo, philo->id);
 		ft_usleep(philo->time_to_die);
 		pthread_mutex_unlock(philo->right_fork);
 		return ;
@@ -36,15 +37,37 @@ void	eat(t_philo *philo)
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->left_fork);
+		if (dead_loop(philo))
+		{
+			pthread_mutex_unlock(philo->left_fork);
+			return ;
+		}
 		print_message("has taken a fork", philo, philo->id);
 		pthread_mutex_lock(philo->right_fork);
+		if (dead_loop(philo))
+		{
+			pthread_mutex_unlock(philo->left_fork);
+			pthread_mutex_unlock(philo->right_fork);
+			return ;
+		}
 		print_message("has taken a fork", philo, philo->id);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->right_fork);
+		if (dead_loop(philo))
+		{
+			pthread_mutex_unlock(philo->right_fork);
+			return ;
+		}
 		print_message("has taken a fork", philo, philo->id);
 		pthread_mutex_lock(philo->left_fork);
+		if (dead_loop(philo))
+		{
+			pthread_mutex_unlock(philo->right_fork);
+			pthread_mutex_unlock(philo->left_fork);
+			return ;
+		}
 		print_message("has taken a fork", philo, philo->id);
 	}
 	pthread_mutex_lock(philo->meal_lock);
@@ -52,7 +75,8 @@ void	eat(t_philo *philo)
 	philo->last_meal = get_current_time();
 	philo->meal_eaten++;
 	pthread_mutex_unlock(philo->meal_lock);
-	print_message("is eating", philo, philo->id);
+	if (!dead_loop(philo))
+		print_message("is eating", philo, philo->id);
 	ft_usleep(philo->time_to_eat);
 	pthread_mutex_lock(philo->meal_lock);
 	philo->eating = 0;
