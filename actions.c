@@ -23,53 +23,41 @@ void	dream(t_philo *philo)
 	ft_usleep(philo->time_to_sleep);
 }
 
+void	one_philosopher(t_philo *philo)
+{
+	pthread_mutex_lock(philo->right_fork);
+	if (!dead_loop(philo))
+	       	print_message("has taken a fork", philo, philo->id);
+	pthread_mutex_lock(philo->meal_lock);
+	philo->last_meal = get_current_time();
+	pthread_mutex_unlock(philo->meal_lock);
+	ft_usleep(philo->time_to_die);
+	pthread_mutex_unlock(philo->right_fork);
+}
+
+static int	take_fork(pthread_mutex_t *fork, t_philo *philo)
+{
+	pthread_mutex_lock(fork);
+	if (dead_loop(philo))
+	{
+		pthread_mutex_unlock(fork);
+		return (0);
+	}
+	print_message("has taken a fork", philo, philo->id);
+	return (1);
+}
+
 void	eat(t_philo *philo)
 {
 	if (philo->nbr_of_philos == 1)
 	{
-		pthread_mutex_lock(philo->right_fork);
-		if (!dead_loop(philo))
-	        print_message("has taken a fork", philo, philo->id);
-		ft_usleep(philo->time_to_die);
-		pthread_mutex_unlock(philo->right_fork);
+		one_philosopher(philo);
 		return ;
 	}
-	if (philo->id % 2 == 0)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		if (dead_loop(philo))
-		{
-			pthread_mutex_unlock(philo->left_fork);
+	if ((philo->id % 2 == 0 && !take_fork(philo->left_fork, philo))
+		|| !take_fork(philo->right_fork, philo)
+		|| (philo->id % 2 != 0 && !take_fork(philo->left_fork, philo)))
 			return ;
-		}
-		print_message("has taken a fork", philo, philo->id);
-		pthread_mutex_lock(philo->right_fork);
-		if (dead_loop(philo))
-		{
-			pthread_mutex_unlock(philo->left_fork);
-			pthread_mutex_unlock(philo->right_fork);
-			return ;
-		}
-		print_message("has taken a fork", philo, philo->id);
-	}
-	else
-	{
-		pthread_mutex_lock(philo->right_fork);
-		if (dead_loop(philo))
-		{
-			pthread_mutex_unlock(philo->right_fork);
-			return ;
-		}
-		print_message("has taken a fork", philo, philo->id);
-		pthread_mutex_lock(philo->left_fork);
-		if (dead_loop(philo))
-		{
-			pthread_mutex_unlock(philo->right_fork);
-			pthread_mutex_unlock(philo->left_fork);
-			return ;
-		}
-		print_message("has taken a fork", philo, philo->id);
-	}
 	pthread_mutex_lock(philo->meal_lock);
 	philo->eating = 1;
 	philo->last_meal = get_current_time();
