@@ -46,4 +46,13 @@ typedef struct s_program
 	t_philo			*philos;
 }	t_program;
 
+typedef struct	s_config
+{
+	int	nbr;
+	long	time_to_die;
+	long	time_to_sleep;
+	long	time_to_eat;
+	long	nbr_times_to_eat;
+}	t_config;
+
 #endif

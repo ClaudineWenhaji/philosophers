@@ -29,10 +29,9 @@
 int		parsing(char **av);
 int		error(char *msg);
 void	init_program(t_program *program, t_philo *philo);
-void	init_forks(pthread_mutex_t *forks, int nbr);
+void	init_forks(pthread_mutex_t *forks, t_config *config);
 void	init_philos(t_philo *philo, t_program *program,
-			pthread_mutex_t *forks, int nbr, long time_to_die,
-			long time_to_eat, long time_to_sleep, long nbr_times_to_eat);
+		pthread_mutex_t *forks, t_config *config);
 int		create_threads(t_program *program, pthread_mutex_t *forks, int nbr);
 void	*philo_routine(void *pointer);
 int		dead_loop(t_philo *philo);
