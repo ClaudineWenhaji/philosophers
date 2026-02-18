@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 16:09:53 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 18:09:27 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:11:10 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	ft_atoi(char *str)
 	return ((int)sum);
 }
 
-void	destroy_all(char *str, t_program *program, pthread_mutex_t *forks, int nbr)
+void	destroy_all(char *str, t_program *program,
+		pthread_mutex_t *forks, int nbr)
 {
 	int	i;
 

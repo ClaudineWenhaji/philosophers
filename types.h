@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 12:19:48 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 13:04:56 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:10:30 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 
 typedef struct s_philo
 {
-	pthread_t	thread;
-	int			id;
-	int			eating;
-	int			meal_eaten;
-	long		last_meal;
-	long		start_time;
-	long		time_to_die;
-	long		time_to_eat;
-	long		time_to_sleep;
-	int			nbr_of_philos;
-	int			nbr_times_to_eat;
-	int			*dead;
+	pthread_t		thread;
+	int				id;
+	int				eating;
+	int				meal_eaten;
+	long			last_meal;
+	long			start_time;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	int				nbr_of_philos;
+	int				nbr_times_to_eat;
+	int				*dead;
 
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -46,13 +46,13 @@ typedef struct s_program
 	t_philo			*philos;
 }	t_program;
 
-typedef struct	s_config
+typedef struct s_config
 {
-	int	nbr;
-	long	time_to_die;
-	long	time_to_sleep;
-	long	time_to_eat;
-	long	nbr_times_to_eat;
+	int				nbr;
+	long			time_to_die;
+	long			time_to_sleep;
+	long			time_to_eat;
+	long			nbr_times_to_eat;
 }	t_config;
 
 #endif

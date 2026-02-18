@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 16:25:55 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 14:48:53 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/18 10:57:47 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	one_philosopher_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
 	if (!dead_loop(philo))
-	       	print_message("has taken a fork", philo, philo->id);
+		print_message("has taken a fork", philo, philo->id);
 	pthread_mutex_lock(philo->meal_lock);
 	philo->last_meal = get_current_time();
 	pthread_mutex_unlock(philo->meal_lock);
@@ -57,7 +57,7 @@ void	eat(t_philo *philo)
 	if ((philo->id % 2 == 0 && !take_fork(philo->left_fork, philo))
 		|| !take_fork(philo->right_fork, philo)
 		|| (philo->id % 2 != 0 && !take_fork(philo->left_fork, philo)))
-			return ;
+		return ;
 	pthread_mutex_lock(philo->meal_lock);
 	philo->eating = 1;
 	philo->last_meal = get_current_time();

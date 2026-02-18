@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:36:04 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 14:56:29 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/18 10:58:48 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	*philo_routine(void *pointer)
 	while (1)
 	{
 		if (dead_loop(philo))
-			break;
+			break ;
 		eat(philo);
 		if (dead_loop(philo))
-			break;
+			break ;
 		dream(philo);
 		if (dead_loop(philo))
-			break;
+			break ;
 		think(philo);
 	}
 	return (NULL);

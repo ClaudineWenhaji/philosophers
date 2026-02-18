@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:31:03 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 18:02:09 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:01:04 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		error(char *msg);
 void	init_program(t_program *program, t_philo *philo);
 void	init_forks(pthread_mutex_t *forks, t_config *config);
 void	init_philos(t_philo *philo, t_program *program,
-		pthread_mutex_t *forks, t_config *config);
+			pthread_mutex_t *forks, t_config *config);
 int		create_threads(t_program *program, pthread_mutex_t *forks, int nbr);
 void	*philo_routine(void *pointer);
 int		dead_loop(t_philo *philo);

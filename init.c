@@ -6,13 +6,14 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:55:01 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 18:14:01 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:00:04 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	init_philos(t_philo *philo, t_program *program, pthread_mutex_t *forks, t_config *config)
+void	init_philos(t_philo *philo, t_program *program,
+		pthread_mutex_t *forks, t_config *config)
 {
 	int		i;
 	long	start_time;
