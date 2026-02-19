@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 16:09:53 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/18 11:11:10 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/19 10:47:34 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,13 @@ void	destroy_all(char *str, t_program *program,
 	free(forks);
 }
 
-int	ft_usleep(int milliseconds)
+void	ft_usleep(long milliseconds)
 {
 	long	start;
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
 		usleep(50);
-	return (0);
 }
 
 long	get_current_time(void)
@@ -87,6 +86,6 @@ long	get_current_time(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
-		error("gettimeofday() error\n");
+		error("gettimeofday() error");
 	return (time.tv_sec * 1000L + time.tv_usec / 1000L);
 }

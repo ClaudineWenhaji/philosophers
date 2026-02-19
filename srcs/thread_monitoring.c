@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:23:23 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 17:45:04 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/19 11:27:35 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_message(char *str, t_philo *philo, int id)
 {
 	long	time;
-	int		dead;
+	long	dead;
 
 	pthread_mutex_lock(philo->dead_lock);
 	dead = *philo->dead;

@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:07:05 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 14:57:40 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/19 10:49:34 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	error(char *msg)
 {
-	printf("philosophers %s\n:", msg);
+	printf("Error\n%s", msg);
 	exit (EXIT_FAILURE);
 }

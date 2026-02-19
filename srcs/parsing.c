@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 20:00:33 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 18:01:56 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/19 10:47:04 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	check_arg_content(char *arg)
 int	parsing(char **av)
 {
 	if (ft_atoi(av[1]) <= 0 || check_arg_content(av[1]) == 1)
-		error("Invalid number of philosophers\n");
+		error("Invalid number of philosophers");
 	if (ft_atoi(av[2]) <= 0 || check_arg_content(av[2]) == 1)
-		error("Invalid time to die\n");
+		error("Invalid time to die");
 	if (ft_atoi(av[3]) <= 0 || check_arg_content(av[3]) == 1)
-		error("Invalid time to eat\n");
+		error("Invalid time to eat");
 	if (ft_atoi(av[4]) <= 0 || check_arg_content(av[4]) == 1)
-		error("Invalid time to sleep\n");
+		error("Invalid time to sleep");
 	if (av[5] && (ft_atoi(av[5]) < 0 || check_arg_content(av[5]) == 1))
 		error("Invalid nbr of times each philosopher must eat");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:47:52 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/16 15:14:22 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/19 10:46:05 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	parse_args(int ac, char **av, t_config *config)
 {
 	if (ac < MIN_ARG_NBR || ac > MAX_ARG_NBR)
-		error("Invalid number of arguments\n");
+		error("Invalid number of arguments");
 	if (parsing(av) == 1)
 		return (1);
 	config->nbr = ft_atoi(av[1]);
@@ -40,10 +40,10 @@ int	main(int ac, char **av)
 		return (1);
 	philo = malloc(sizeof(t_philo) * config.nbr);
 	if (!philo)
-		return (error("Memory allocation error\n"));
+		return (error("Memory allocation error"));
 	forks = malloc(sizeof(pthread_mutex_t) * config.nbr);
 	if (!forks)
-		return (error("Memory allocation failed\n"));
+		return (error("Memory allocation failed"));
 	init_program(&program, philo);
 	init_forks(forks, &config);
 	init_philos(philo, &program, forks, &config);

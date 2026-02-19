@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:31:03 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/18 11:01:04 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:01:27 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	init_philos(t_philo *philo, t_program *program,
 			pthread_mutex_t *forks, t_config *config);
 int		create_threads(t_program *program, pthread_mutex_t *forks, int nbr);
 void	*philo_routine(void *pointer);
-int		dead_loop(t_philo *philo);
+int		is_dead(t_philo *philo);
 void	*thread_monitoring(void *pointer);
 int		check_if_all_ate(t_philo *philos, int nbr);
 int		check_if_dead(t_philo *philos, int nbr);
 int		philosopher_dead(t_philo *philo, long time_to_die);
 void	print_message(char *str, t_philo *philo, int id);
 long	get_current_time(void);
-int		ft_usleep(int milliseconds);
+void	ft_usleep(long milliseconds);
 void	destroy_all(char *str, t_program *program,
 			pthread_mutex_t *forks, int nbr);
 int		ft_atoi(char *str);

@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:36:04 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/18 10:58:48 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/18 21:42:51 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "philosophers.h"
 
-int	dead_loop(t_philo *philo)
+int	is_dead(t_philo *philo)
 {
 	int	dead;
 
@@ -32,16 +32,16 @@ void	*philo_routine(void *pointer)
 
 	philo = (t_philo *)pointer;
 	if (philo->id % 2 == 0)
-		ft_usleep(1);
+		ft_usleep(philo->time_to_die / 2);
 	while (1)
 	{
-		if (dead_loop(philo))
+		if (is_dead(philo))
 			break ;
 		eat(philo);
-		if (dead_loop(philo))
+		if (is_dead(philo))
 			break ;
 		dream(philo);
-		if (dead_loop(philo))
+		if (is_dead(philo))
 			break ;
 		think(philo);
 	}
