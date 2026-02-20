@@ -6,14 +6,15 @@
 #    By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/10 14:22:25 by clwenhaj          #+#    #+#              #
-#    Updated: 2026/02/19 14:00:10 by clwenhaj         ###   ########.fr        #
+#    Updated: 2026/02/20 12:30:58 by clwenhaj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -MMD
+CFLAGS = -Wall -Wextra -Werror
+
 INCLUDES = -I includes
 
 RM = rm -f
@@ -28,9 +29,8 @@ SRCS = srcs/actions.c \
 		srcs/utils.c
 
 OBJS	= ${SRCS:.c=.o}
-DEPS	= ${OBJS:.o=.d}
 
-HEADERS	= includes/philosophers.h includes/types.h
+HEADERS = includes/philosophers.h includes/types.h
 
 all: ${NAME}
 
@@ -41,13 +41,11 @@ ${NAME}: ${OBJS}
 	${CC} ${CFLAGS} -c $< -o $@ ${INCLUDES}
 
 clean:
-	${RM} ${OBJS} ${DEPS}
+	${RM} ${OBJS} 
 
 fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
-
--include ${DEPS}
 
 .PHONY: all clean fclean re
