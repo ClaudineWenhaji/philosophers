@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:31:03 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/19 14:01:27 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:44:22 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	init_philos(t_philo *philo, t_program *program,
 			pthread_mutex_t *forks, t_config *config);
 int		create_threads(t_program *program, pthread_mutex_t *forks, int nbr);
 void	*philo_routine(void *pointer);
+void	one_philosopher(t_philo *philo);
+void	start_eating(t_philo *philo);
+void	finish_eating(t_philo *philo);
 int		is_dead(t_philo *philo);
 void	*thread_monitoring(void *pointer);
 int		check_if_all_ate(t_philo *philos, int nbr);

@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:23:23 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/19 11:27:35 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/23 19:09:26 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	*thread_monitoring(void *pointer)
 			break ;
 		if (check_if_all_ate(program->philos, program->philos[0].nbr_of_philos))
 			break ;
-		usleep(100);
+		usleep(200);
 	}
 	return (NULL);
 }

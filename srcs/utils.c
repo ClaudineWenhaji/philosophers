@@ -6,7 +6,7 @@
 /*   By: clwenhaj <clwenhaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 16:09:53 by clwenhaj          #+#    #+#             */
-/*   Updated: 2026/02/19 10:47:34 by clwenhaj         ###   ########.fr       */
+/*   Updated: 2026/02/23 19:09:21 by clwenhaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,12 @@ void	ft_usleep(long milliseconds)
 	long	start;
 
 	start = get_current_time();
-	while ((get_current_time() - start) < milliseconds)
-		usleep(50);
+	while (1)
+	{
+		if ((get_current_time() - start) >= milliseconds)
+			break ;
+		usleep(200);
+	}
 }
 
 long	get_current_time(void)
